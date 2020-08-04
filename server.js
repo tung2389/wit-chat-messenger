@@ -6,29 +6,28 @@
 const express = require("express");
 const app = express();
 
-// our default array of dreams
-const dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
+app.get('/webhook', (req, res) => {
+    let VERIFY_TOKEN = process.env.
+    
+    // Parse the query params
+    let mode = req.query['hub.mode'];
+    let token = req.query['hub.verify_token'];
+    let challenge = req.query['hub.challenge'];
 
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
-app.use(express.static("public"));
+    // Checks if a token and mode is in the query string of the request
+    if (mode && token) {
 
-// https://expressjs.com/en/starter/basic-routing.html
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/views/index.html");
-});
+      // Checks the mode and token sent is correct
+      if (mode === 'subscribe' && token === VERIFY_TOKEN) {
 
-// send the default array of dreams to the webpage
-app.get("/dreams", (request, response) => {
-  // express helps us take JS objects and send them as JSON
-  response.json(dreams);
-});
+        // Responds with the challenge token from the request
+        console.log('WEBHOOK_VERIFIED');
+        res.status(200).send(challenge);
 
-// listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
-  console.log("Your app is listening on port " + listener.address().port);
+      } else {
+        // Responds with '403 Forbidden' if verify tokens do not match
+        res.sendStatus(403);      
+      }
+    }
+    res.status(200).send(challenge);
 });
