@@ -16,7 +16,7 @@ function responseFromWit(data) {
 
 function handleGibberish() {
   return Promise.resolve(
-    "ask me something like 'what time is it in Menlo Park?' or 'how far from Menlo Park to Seattle?'"
+    "You can ask me about time and distance, something like 'what time is it in New York' or 'what's the distance between Seattle and New York?'"
   );
 }
 

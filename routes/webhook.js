@@ -2,7 +2,7 @@ const express = require('express')
 const Wit = require("node-wit").Wit;
 const log = require("node-wit").log;
 
-const sendMessage = require('./controller/message.js')
+const sendMessage = require('../controller/message.js')
 
 const WIT_TOKEN = process.env.WIT_TOKEN;
 const FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
@@ -69,7 +69,7 @@ router.post("/webhook", (req, res) => {
               .message(text)
               .then(res => handler.responseFromWit(res))
               .then(msg => {
-                fbMessage(sender, msg);
+                sendMessage(senderId, msg);
               })
               .catch(err => {
                 console.error(
