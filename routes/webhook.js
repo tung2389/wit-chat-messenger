@@ -1,11 +1,19 @@
 const express = require('express')
-const router = express.Router()
+const Wit = require("node-wit").Wit;
+const log = require("node-wit").log;
 
 const sendMessage = require('./controller/message.js')
 
+const WIT_TOKEN = process.env.WIT_TOKEN;
+const FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
+
+const router = express.Router()
+const wit = new Wit({
+  accessToken: WIT_TOKEN,
+  logger: new log.Logger(log.INFO)
+});
+
 router.get('/', (req, res) => {
-  let FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
-  
   // Parse the query params
   let mode = req.query['hub.mode'];
   let token = req.query['hub.verify_token'];

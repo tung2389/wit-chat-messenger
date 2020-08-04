@@ -1,4 +1,4 @@
-let FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN
+const FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN
 
 function sendMessage(id, text) {
   const body = JSON.stringify({
