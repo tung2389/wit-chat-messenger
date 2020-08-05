@@ -41,6 +41,7 @@ router.post("/", (req, res) => {
   // See the Webhook reference
   // https://developers.facebook.com/docs/messenger-platform/webhook-reference
   const data = req.body;
+  console.log(data)
 
   if (data.object === "page") {
     data.entry.forEach(entry => {
