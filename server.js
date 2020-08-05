@@ -1,5 +1,5 @@
 const express = require("express");
-const http = require('http');
+const https = require('https');
 const app = express();
 const bodyParser = require('body-parser')
 //require('dotenv').config();
@@ -22,6 +22,5 @@ app.listen(process.env.PORT, function() {
 });
 
 setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-}, 290000);
-
+  https.get(`https://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 290000)
