@@ -54,7 +54,7 @@ function handleDistanceBetween(data) {
   distance = roundTo(distance, 0.01);
   return Promise.resolve(
     {
-      text: `It's ${distance}km from ${loc0.name} to ${loc1.name}`
+      text: `The distance between ${loc0.name} to ${loc1.name} is ${distance}km`
     }
   );
 }
@@ -97,7 +97,7 @@ function handleTimeAtPlace(data) {
 
   return currentTimeFromTimezone(tz).then(res => {
     return {
-      text: `It's currently ${res} in ${placeName}`
+      text: `It's ${res} in ${placeName} now`
     };
   });
 }
