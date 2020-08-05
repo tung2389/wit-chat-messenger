@@ -3,6 +3,7 @@ const Wit = require("node-wit").Wit;
 const log = require("node-wit").log;
 
 const sendMessage = require('../controller/message.js')
+const witHandler = require('../controller/wit.js')
 
 const WIT_TOKEN = process.env.WIT_TOKEN;
 const FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
@@ -39,7 +40,6 @@ router.post("/", (req, res) => {
   // See the Webhook reference
   // https://developers.facebook.com/docs/messenger-platform/webhook-reference
   const data = req.body;
-  console.log(req)
 
   if (data.object === "page") {
     data.entry.forEach(entry => {
@@ -68,7 +68,7 @@ router.post("/", (req, res) => {
             // Let's run /message on the text to extract some entities, intents and traits
             wit
               .message(text)
-              .then(res => handler.responseFromWit(res))
+              .then(res => witHandler.responseFromWit(res))
               .then(msg => {
                 sendMessage(senderId, msg);
               })

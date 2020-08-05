@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 // Import routes
 const webhook = require('./routes/webhook')
 
+// Use middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
