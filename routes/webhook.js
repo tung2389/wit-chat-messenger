@@ -61,7 +61,9 @@ router.post("/", (req, res) => {
             // Let's reply with an automatic message
             sendMessage(
               senderId,
-              "Sorry, I can only process text messages for now."
+              {
+                text: "Sorry, I can only process text messages for now."
+              }
             ).catch(console.error);
           } else if (text) {
             // We received a text message

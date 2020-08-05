@@ -1,9 +1,9 @@
 const FB_PAGE_TOKEN = process.env.FB_PAGE_TOKEN
 
-function sendMessage(id, text) {
+function sendMessage(id, message) {
   const body = JSON.stringify({
     recipient: { id },
-    message: { text }
+    message: message
   });
   const qs = "access_token=" + encodeURIComponent(FB_PAGE_TOKEN);
   return fetch("https://graph.facebook.com/me/messages?" + qs, {

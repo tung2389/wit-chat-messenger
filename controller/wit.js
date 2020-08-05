@@ -16,7 +16,21 @@ function responseFromWit(data) {
 
 function handleGibberish() {
   return Promise.resolve(
-    "You can ask me about time and distance, something like 'what time is it in New York' or 'what's the distance between Seattle and New York?'"
+    //"You can ask me about time and distance, something like 'what time is it in New York' or 'what's the distance between Seattle and New York?'"
+    {
+      text: "You can ask me about time and distance",
+      "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"Get time at a location",
+          "payload":"GET_TIME_AT_PLACE",
+        },{
+          "content_type":"text",
+          "title":"Get distance between locations",
+          "payload":"GET_DISTANCE_BETWEEN",
+        }
+      ]
+    }
   );
 }
 
@@ -39,7 +53,9 @@ function handleDistanceBetween(data) {
   );
   distance = roundTo(distance, 0.01);
   return Promise.resolve(
-    `It's ${distance}km from ${loc0.name} to ${loc1.name}`
+    {
+      text: `It's ${distance}km from ${loc0.name} to ${loc1.name}`
+    }
   );
 }
 
@@ -80,7 +96,9 @@ function handleTimeAtPlace(data) {
   const placeName = loc.resolved.values[0].name;
 
   return currentTimeFromTimezone(tz).then(res => {
-    return `It's currently ${res} in ${placeName}`;
+    return {
+      text: `It's currently ${res} in ${placeName}`
+    };
   });
 }
 
