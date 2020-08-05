@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/webhook", webhook)
 
 app.get("/", (req, res) => {
-  res.sendStatus(200);
+  res.status(200).send('The server is activated!. Now you can use my chat bot');
 })
 
 app.listen(process.env.PORT, function() {
