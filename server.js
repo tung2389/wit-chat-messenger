@@ -1,4 +1,5 @@
 const express = require("express");
+const http = require('http');
 const app = express();
 const bodyParser = require('body-parser')
 //require('dotenv').config();
@@ -13,10 +14,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/webhook", webhook)
 
 app.get("/", (req, res) => {
-  res.status(200).send("hello world")
+  res.sendStatus(200);
 })
 
 app.listen(process.env.PORT, function() {
   console.log(`Server is running at port ${process.env.PORT}`);
 });
+
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 295555);
 
