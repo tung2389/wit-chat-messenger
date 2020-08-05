@@ -1,9 +1,13 @@
 const express = require("express");
 const app = express();
+const bodyParser = require('body-parser')
 //require('dotenv').config();
 
 // Import routes
 const webhook = require('./routes/webhook')
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/webhook", webhook)
 

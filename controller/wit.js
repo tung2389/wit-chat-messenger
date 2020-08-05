@@ -5,9 +5,9 @@ function responseFromWit(data) {
   const intent = data.intents.length > 0 && data.intents[0] || "__foo__";
   
   switch (intent.name) {
-    case "distanceBetween":
+    case "getDistanceBetween":
       return handleDistanceBetween(data);
-    case "timeAtPlace":
+    case "getTimeAtPlace":
       return handleTimeAtPlace(data);
   }
   
