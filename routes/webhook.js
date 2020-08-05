@@ -4,6 +4,7 @@ const log = require("node-wit").log;
 
 const sendMessage = require('../controller/message.js')
 const witHandler = require('../controller/wit.js')
+const handleQuickReply = require('../controller/quickReply.js')
 
 const WIT_TOKEN = process.env.WIT_TOKEN;
 const FB_VERIFY_TOKEN = process.env.FB_VERIFY_TOKEN;
@@ -47,7 +48,6 @@ router.post("/", (req, res) => {
         if (event.message && !event.message.is_echo) {
           // We got a new message
           // We retrieve the Facebook user ID of the sender
-          console.log(event)
           const senderId = event.sender.id;
 
           // We could retrieve the user's current session, or create one if it doesn't exist
@@ -55,7 +55,7 @@ router.post("/", (req, res) => {
           // const sessionId = findOrCreateSession(sender);
 
           // We retrieve the message content
-          const { text, attachments } = event.message;
+          const { text, attachments, quick_reply } = event.message;
 
           if (attachments) {
             // We received an attachment
@@ -66,10 +66,15 @@ router.post("/", (req, res) => {
                 text: "Sorry, I can only process text messages for now."
               }
             ).catch(console.error);
-          } else if (text) {
+          }
+          else if(quick_reply) {
+            handleQuickReply(quick_reply.payload).then(msg => {
+              sendMessage(senderId, msg)
+            })
+          }
+          else if (text) {
             // We received a text message
             // Let's run /message on the text to extract some entities, intents and traits
-            if()
             wit
               .message(text)
               .then(res => witHandler.responseFromWit(res))

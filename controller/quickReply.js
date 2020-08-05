@@ -12,3 +12,5 @@ function handleQuickReply(payload) {
       });
   }
 }
+
+module.exports = handleQuickReply
