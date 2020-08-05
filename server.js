@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/webhook", webhook)
 
 app.get("/", (req, res) => {
-  res.send("hello world")
+  res.status(200).send("hello world")
 })
 
 app.listen(process.env.PORT, function() {
