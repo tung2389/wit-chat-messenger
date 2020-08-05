@@ -22,11 +22,11 @@ function handleGibberish() {
       "quick_replies":[
         {
           "content_type":"text",
-          "title":"Get time at a location",
+          "title":"Ask time",
           "payload":"GET_TIME_AT_PLACE",
         },{
           "content_type":"text",
-          "title":"Get distance between locations",
+          "title":"Ask distance",
           "payload":"GET_DISTANCE_BETWEEN",
         }
       ]

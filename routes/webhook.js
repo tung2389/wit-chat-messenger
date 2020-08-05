@@ -47,6 +47,7 @@ router.post("/", (req, res) => {
         if (event.message && !event.message.is_echo) {
           // We got a new message
           // We retrieve the Facebook user ID of the sender
+          console.log(event)
           const senderId = event.sender.id;
 
           // We could retrieve the user's current session, or create one if it doesn't exist
@@ -68,6 +69,7 @@ router.post("/", (req, res) => {
           } else if (text) {
             // We received a text message
             // Let's run /message on the text to extract some entities, intents and traits
+            if()
             wit
               .message(text)
               .then(res => witHandler.responseFromWit(res))
